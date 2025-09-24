@@ -10,12 +10,18 @@
             padding: 5px;
             border-radius: 15px;
         }
+        footer{
+            text-align: center;
+        }
+        h1{
+            font-size: 24px;
+        }
         body{
             font-family: Quicksand, sans-serif;
             margin: 0;
             padding: 0;
         }
-        #box{
+        .box{
             background-color: rgb(215, 255, 206);
             padding:25px;
             margin: 15px;
@@ -30,13 +36,13 @@
         nav ul li{
             margin: 10px auto;
             padding-bottom: 8px;
-            border-bottom:2px solid black;
+            border-bottom:1px solid black;
         }
         nav ul li:last-child{
             border-bottom:none;
         }
         .active{
-            border-bottom:2px solid black;
+            border-bottom:1px solid black;
         }
         nav ul a{
             text-decoration: none;
@@ -80,13 +86,18 @@
         </nav>
     </header>
     <main>
-        <div id="box">we learned about responsive design. in inspect element, you can choose a
+        <div class="box">
+            <h1>week 2: the responsive example</h1>
+            <p>we learned about responsive design. in inspect element, you can choose a
             phone dimension to see your site in, as well as throttle your connection to 
-            see how it would load for different receptions strangths.
+            see how it would load for different receptions strengths.</p>
+            <p>by using @media(min-size:n) you can make your css responsive depending on
+                the width of your screen, making it more suitable for phones/tablets/desktop
+            </p>
         </div>
     </main>
     <footer>
-
+        <p>eat my foot(er)</p>
     </footer>
 </body>
 </html>
