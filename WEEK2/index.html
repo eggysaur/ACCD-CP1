@@ -35,28 +35,35 @@
         nav ul li:last-child{
             border-bottom:none;
         }
+        .active{
+            border-bottom:2px solid black;
+        }
         nav ul a{
             text-decoration: none;
             color: black;
-            font-weight: bold;
             text-transform: uppercase;
         }
         nav ul a:hover{
-            color:rgb(255, 0, 0)
+            color:rgb(0, 0, 0);
+            font-weight: 900;
         }
         @media (min-width: 768px){
             nav ul{
                 display: flex;
                 flex-direction: horizontal;
-                justify-content: center;
+                justify-content: end;
+                
             }
             nav ul li{
                 margin: 0 10px;
                 padding-bottom: 0;
-                border-bottom:2px solid;
+                border-bottom:none;
+                list-style: none;
+                text-align: center;
             }
+            
             nav ul li:last-child{
-                border-bottom:2px solid;
+                border-bottom:none;
             }
         }
 
@@ -67,7 +74,7 @@
         <nav>
             <ul>
                 <li><a href="#Home">Home</a></li>
-                <li><a href="#Work">Work</a></li>
+                <li class="active"><a href="#Work">Work</a></li>
                 <li><a href="#Blog">Blog</a></li>
             </ul>
         </nav>
