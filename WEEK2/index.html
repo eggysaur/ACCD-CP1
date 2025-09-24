@@ -32,11 +32,32 @@
             padding-bottom: 8px;
             border-bottom:2px solid black;
         }
+        nav ul li:last-child{
+            border-bottom:none;
+        }
         nav ul a{
             text-decoration: none;
             color: black;
             font-weight: bold;
             text-transform: uppercase;
+        }
+        nav ul a:hover{
+            color:rgb(255, 0, 0)
+        }
+        @media (min-width: 768px){
+            nav ul{
+                display: flex;
+                flex-direction: horizontal;
+                justify-content: center;
+            }
+            nav ul li{
+                margin: 0 10px;
+                padding-bottom: 0;
+                border-bottom:2px solid;
+            }
+            nav ul li:last-child{
+                border-bottom:2px solid;
+            }
         }
 
     </style>
