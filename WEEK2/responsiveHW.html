@@ -15,25 +15,44 @@
         .meow{
             border-radius: 25px;
             background-color:rgb(233, 255, 143);
-            padding:20px;
+            padding: 15px;
+            padding-left: 25px;
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
         }
+        .meow:hover{
+            outline: rgb(0, 0, 0) dotted 3px;
+        }
+        .woof{
 
-        /* At viewport width 600px or less */
+        }
+
+        .treat{
+
+        }
+
         @media (max-width: 800px) {
             body {
                 background: #6bbfff;
                 color: #005;
+                text-align: center;
+            }
+            .meow {
+                background-color: rgb(255, 179, 179);
+                padding: 20px;;
             }
         }
 
-        /* At viewport width 300px or less */
-        @media (max-width: 400px) {
+        @media (max-width: 450px) {
             body {
                 background: #ff5e5e;
                 color: rgb(87, 0, 0);
+                text-align: right;
+            }
+            .meow {
+                background-color: rgb(179, 255, 179);
+                padding: 25px;;
             }
         }
 
@@ -52,5 +71,16 @@
         window.addEventListener('resize', updateDimensions);
         updateDimensions();
     </script>
+    <p class="meow">meow</p>
+    <ul class="woof">
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
+        <li>woof</li>
 </body>
 </html>
