@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Responsive CSS Example</title>
+    <title>Responsive CSS Homework</title>
     <style>
 
         body {
@@ -10,7 +10,7 @@
             color: #222;
             font-family: Quicksand, sans-serif;
             padding: 20px;
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.8s;
         }
         .meow{
             border-radius: 25px;
@@ -20,17 +20,25 @@
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
+            transition: background-color 0.8s;
         }
         .meow:hover{
             outline: rgb(0, 0, 0) dotted 3px;
         }
-        .woof{
-
+        ul {
+            list-style-type: none;
+            display: inline-block;
         }
 
-        .treat{
-
+        ul li{
+            display: inline-flex;
+            margin: 10px;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgb(179, 255, 179);
+            
         }
+
 
         @media (max-width: 800px) {
             body {
@@ -41,6 +49,21 @@
             .meow {
                 background-color: rgb(255, 179, 179);
                 padding: 20px;;
+            }
+            ul {
+                margin-left:-10px;
+                margin-right: 5%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                justify-items: center;
+            }
+            ul li {
+                width: 100%;
+                display: block;
+            }
+            ul li :hover{
+                outline: rgb(255, 255, 255) dotted 3px;
             }
         }
 
@@ -53,6 +76,25 @@
             .meow {
                 background-color: rgb(179, 255, 179);
                 padding: 25px;;
+            }
+            ul {
+                margin-right:60px;
+                margin-left:-10%;
+                list-style-type: none;
+                display: inline-block;
+                text-align: right;
+            }
+            ul li {
+                display: inline-block;
+                margin: 10px;
+                border-radius: 10px;
+                padding: 20px;
+                background-color: rgb(179, 255, 179);
+            }
+        }
+        @media (max-width: 280px) {
+            ul{
+                display: none;
             }
         }
 
@@ -72,15 +114,16 @@
         updateDimensions();
     </script>
     <p class="meow">meow</p>
-    <ul class="woof">
+    <ul>
         <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
-        <li>woof</li>
+        <li>information</li>
+        <li>attitude</li>
+        <li>cell</li>
+        <li>estate</li>
+        <li>management</li>
+        <li>pikachu</li>
+        <li>chirp</li>
+        <li>blocks</li>
+    </u>
 </body>
 </html>
