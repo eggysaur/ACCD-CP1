@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ACCD-CP1 Links</title>
+  <title>ACCD-CP1</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,20 +29,18 @@
   </style>
 </head>
 <body>
-  <h1>ACCD-CP1 Project Links</h1>
+  <h1>ACCD-CP1</h1>
   <ul id="links"></ul>
 
-  <script>
-    // 👇 Add your folders + files here
-    const files = {
-      "WEEK1": ["index.html"],
-      "WEEK2": ["index.html", "responsiveHW.html"],
-      "WEEK3": ["demo.html"]
-    };
+  <!-- Load the auto-generated file list -->
+  <script src="fileList.js"></script>
 
+  <!-- Main script -->
+  <script>
     const base = "https://eggysaur.github.io/ACCD-CP1/";
     const list = document.getElementById("links");
 
+    // files comes from fileList.js now!
     for (const folder in files) {
       const folderHeader = document.createElement("h2");
       folderHeader.textContent = folder;
