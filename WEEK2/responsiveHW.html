@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive CSS Example</title>
+    <style>
+
+        body {
+            background: #f0f0f0;
+            color: #222;
+            font-family: Quicksand, sans-serif;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .meow{
+            border-radius: 25px;
+            background-color:rgb(233, 255, 143);
+            padding:20px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* At viewport width 600px or less */
+        @media (max-width: 800px) {
+            body {
+                background: #6bbfff;
+                color: #005;
+            }
+        }
+
+        /* At viewport width 300px or less */
+        @media (max-width: 400px) {
+            body {
+                background: #ff5e5e;
+                color: rgb(87, 0, 0);
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Responsive CSS Homework</h1>
+    <p class="meow">This is pretty cool!</p>
+    <p id="window-dimensions" class="meow"></p>
+    <script>
+        function updateDimensions() {
+            const dims = `${window.innerWidth}`;
+            document.getElementById('window-dimensions').textContent = `current width: ${dims}`;
+        }
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions();
+    </script>
+</body>
+</html>
