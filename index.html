@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repository Explorer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        ul { list-style-type: none; padding-left: 0; }
+        li { margin: 0.5em 0; }
+        a { text-decoration: none; color: #0366d6; }
+        a:hover { text-decoration: underline; }
+        .folder { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>ACCD-CP1 Repository Explorer</h1>
+    <ul id="repo-list"></ul>
+    <script>
+        // Change these to match your GitHub username and repo name
+        const username = "ingri";
+        const repo = "ACCD-CP1";
+        const branch = "main"; // or your default branch
+
+        async function fetchRepoContents(path = "") {
+            const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=${branch}`;
+            const response = await fetch(apiUrl);
+            if (!response.ok) return [];
+            return await response.json();
+        }
+
+        function createLink(item) {
+            let url;
+            if (item.type === "dir") {
+                url = `https://github.com/${username}/${repo}/tree/${branch}/${item.path}`;
+                return `<li class="folder"><a href="${url}" target="_blank">📁 ${item.name}</a></li>`;
+            } else if (item.name.endsWith(".html")) {
+                url = `https://github.com/${username}/${repo}/blob/${branch}/${item.path}`;
+                return `<li><a href="${url}" target="_blank">🗎 ${item.name}</a></li>`;
+            }
+            return "";
+        }
+
+        async function populateList(path = "") {
+            const list = document.getElementById("repo-list");
+            const items = await fetchRepoContents(path);
+            for (const item of items) {
+                if (item.type === "dir") {
+                    list.innerHTML += createLink(item);
+                } else if (item.name.endsWith(".html")) {
+                    list.innerHTML += createLink(item);
+                }
+            }
+        }
+
+        populateList();
+    </script>
+</body>
+</html>
