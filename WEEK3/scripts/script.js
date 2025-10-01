@@ -21,12 +21,14 @@ let toggleImage = () => {
     console.log("image toggled");
     if(catIma.src.includes("nyancat")){
         catIma.src = "images/technyancolor.gif";
+        setInterval(meowChanger, 100);
     }
     else{
         catIma.src = "images/nyancat.gif";
     }
 
-}   
+} 
+
 //let meowButton = document.getElementById("meowButton");
 //meowButton.addEventListener("click", meowChanger);
 //window.addEventListener("load", meowChanger);
