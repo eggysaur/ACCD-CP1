@@ -1,0 +1,39 @@
+*{
+    font-family: quicksand, sans-serif;
+}
+
+body{
+    margin: 0;
+}
+.content{
+    margin: 20px;
+}
+
+#meow{
+    height:400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff;
+    border:black 1px solid;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+button:hover{
+    background-color: #e4e4e4;
+}
+#nyancat {
+    width:auto;
+    margin-top: 20px;
+}
+#imgTrigger {
+    height:80px;
+    width:auto;
+    margin-top: 20px;
+}
