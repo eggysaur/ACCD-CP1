@@ -10,5 +10,9 @@ const files = {
   "WEEK2": [
     "index.html",
     "responsiveHW.html"
+  ],
+  "WEEK3": [
+    "index.html",
+    "jspuzzle.html"
   ]
 };

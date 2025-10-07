@@ -1,0 +1,87 @@
+@import url('https://fonts.cdnfonts.com/css/minecraftia');
+@import "./node_modules/nes.css/css/nes.css";
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Press Start 2P', cursive;
+}
+body{
+    background-color: rgb(184, 181, 194);
+}
+div{
+    text-align: center;
+    margin: 20px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+#puzzle ul{
+    height: auto;
+}
+
+ul{
+    list-style-type: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+li {
+    display: block;
+    margin: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+
+    padding: 20px;
+}
+
+li:hover{
+    border: 4px solid rgb(0, 0, 0);
+    background-color: rgb(240, 240, 240);
+    cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+}
+
+img{
+    width: auto;
+    height: 80px;
+}
+button{
+    display: block;
+    justify-content: right;
+}
+ul#items {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 16px; /* optional: space between items */
+    padding-bottom: 10px;
+  scrollbar-width: auto; /* for Firefox */
+}
+
+ul#items::-webkit-scrollbar {
+    height: 15px;
+}
+
+ul#items::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+.bounce-on-hover {
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.bounce-on-hover:hover {
+  animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-30px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}

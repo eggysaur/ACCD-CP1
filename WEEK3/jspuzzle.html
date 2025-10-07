@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
+    <!-- minify -->
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+    <!-- latest -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <!-- core style only -->
+    <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style2.css">
+    <title>CatPuzzle</title>
+</head>
+<body>
+    <div id="bank"class="nes-container with-title is-centered bottom" style="padding:0x">
+        <p class="title">nyan sorter</p>
+        <ul id ="items">
+            <li class="nes-container is-rounded"><img src="images/nyancat.gif" id="original"></li>
+            <li class="nes-container is-rounded"><img src="images/pikanyan.gif"id="pika"></li>
+            <li class="nes-container is-rounded"><img src="images/fiesta.gif"id="fiesta"></li>
+            <li class="nes-container is-rounded"><img src="images/technyancolor.gif"id="techno"></li>
+            <li class="nes-container is-rounded"><img src="https://www.nyan.cat/cats/gb.gif"id="gb"></li>
+        </ul>
+        <p id="hint">scroll over a nyan for a hint!</p>
+    </div>
+
+
+
+    <div id="puzzle" class="nes-container with-title is-centered bottom">
+        <p class="title">ordered here!</p>
+        <ul id ="items">
+            
+        </ul>
+    </div>
+
+    <div style="background: none;">
+        <button id="confirm" class="nes-btn is-disabled">unsolved</button>
+    </div>
+    <div id="result" style="background: none;">
+    </div>
+
+<script src="scripts/puzzlescript.js"></script>
+
+</body>
+</html>
