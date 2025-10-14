@@ -6,9 +6,7 @@ const sourceList = document.querySelector("body > .nes-container ul#items");
   const sourceItems = sourceList.querySelectorAll("li");
   const hint = document.getElementById("hint");
   
-  window.addEventListener("DOMContentLoaded", () => {
-  
-
+window.addEventListener("DOMContentLoaded", () => {
   // Map img ids to hint text
   const hints = {
     original: "happy anywhere",

@@ -14,5 +14,8 @@ const files = {
   "WEEK3": [
     "index.html",
     "jspuzzle.html"
+  ],
+  "WEEK4": [
+    "index.html"
   ]
 };
