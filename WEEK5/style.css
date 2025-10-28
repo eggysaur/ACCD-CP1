@@ -13,6 +13,14 @@ div{
     background-color: rgb(255, 255, 255);
     display:block;
 }
+.gall{
+    padding: 15px;
+    margin:10px;
+    border: 2px none black;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    display:flex;
+}
 p{
     margin: 12px;
     font-size: 20px;
@@ -25,6 +33,7 @@ img{
     border: 2px solid #d5dde5;
     margin: auto;
 }
-href:hover{
-    opacity: 80%;
+a:hover img {
+  border-color: #000;
+  transition: border-color 0.15s ease;
 }
