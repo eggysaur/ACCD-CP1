@@ -19,6 +19,7 @@ const files = {
     "index.html"
   ],
   "WEEK5": [
-    "index.html"
+    "index.html",
+    "response.html"
   ]
 };
