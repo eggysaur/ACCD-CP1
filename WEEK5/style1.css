@@ -1,0 +1,44 @@
+*{
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+div{
+    border: 1.5px solid black;
+}
+.title{
+    text-align: center;
+    border: 1.5px solid black;
+}
+.container{
+    border: 1px none black;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    display: flex;
+}
+.container-left{
+    border: 1px none black;
+    width:50%;
+    margin-right:5px;
+    display: block;
+}
+.container-right{
+    border: 1px none black;
+    width:50%;
+    margin-left:5px;
+    display: block;
+}
+.item{
+    margin:0px;
+    margin-top:10px;
+    width:100%;
+}
+img{
+    display: block;
+    margin:auto;
+    border: 1.5px solid black;
+    width:90%;
+}
+p{
+    margin:25px;
+}
