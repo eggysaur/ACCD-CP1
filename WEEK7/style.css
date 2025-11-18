@@ -9,18 +9,37 @@
 	font-style: normal;
 	font-display: swap;
 }
+*{
+	font-family: var(--mc-font) !important;
+}
+html, body { 
+	margin: 0; 
+	padding: 0; 
+	height: 100%; 
+	overflow-x: hidden;
+	text-align: center;
+	align-items: center;
+}
+        
+#container { 
+	width: 90%; 
+}
 
-/* CSS variable for the Minecraftia stack */
+canvas { display: block; }
+
+.blog{
+	display: inline-block;
+	text-align: left;
+	padding: 20px;
+	background-color: #f0f0f0;
+	margin: 20px;
+	width:50%;
+}
+
 :root {
 	--mc-font: 'MinecraftiaRegular', 'Minecraftia', 'MinecraftiaFallback', monospace;
 }
 
-/* Apply Minecraftia as the font for everything */
-html, body, * {
-	font-family: var(--mc-font) !important;
-}
-
-/* Optional: tweak default line-height for better readability with pixel fonts */
 body {
 	line-height: 1.15;
 }
