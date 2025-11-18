@@ -21,5 +21,8 @@ const files = {
   "WEEK5": [
     "index.html",
     "response.html"
+  ],
+  "WEEK7": [
+    "index.html"
   ]
 };
