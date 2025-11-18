@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>p5 full-width canvas</title>
+    <style>
+        @import url('style.css');
+        html, body { margin: 0; padding: 0; height: 100%; }
+        #container { width: 100%; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+
+<div id="container"></div>
+<div id="controls" style="padding:8px 12px; font-family: sans-serif;">
+    <label for="speedSlider">Speed:</label>
+    <input id="speedSlider" type="range" min="0" max="0.2" step="0.001" value="0.03" />
+    <span id="speedValue">0.03</span>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+<script>
+    let cnv;
+    let t = 0;
+    let speed = 0.03;
+    let amplitude;
+    let baseY;
+    let w = 10;
+    let recw;
+    let count = 20;  // how many columns
+
+    function setup() {
+    cnv = createCanvas(windowWidth, 400);
+    cnv.parent("container");
+    colorMode(HSB, 100, 100, 100);
+
+        // initialize DOM controls
+        const slider = document.getElementById('speedSlider');
+        const speedDisplay = document.getElementById('speedValue');
+        // set starting value from JS variable
+        slider.value = speed;
+        speedDisplay.textContent = Number(speed).toFixed(3);
+        // update speed when the slider moves
+        slider.addEventListener('input', () => {
+            speed = parseFloat(slider.value);
+            speedDisplay.textContent = Number(speed).toFixed(3);
+        });
+
+        calculateLayout();
+    }
+
+    function draw() {
+    background(20);
+    t += speed;
+    noStroke();
+
+    for (let i = 0; i < count; i++) {
+        let offset = i * 0.1;
+        let bounce = abs(sin(t + offset));
+        let y = baseY - bounce * amplitude;
+
+        let sat = ((baseY - y) / amplitude) * 100;
+
+        fill(i * 3, sat, 100);
+        rect(i * recw, 0, recw, height);
+
+        fill(25 + i * 3, 100, sat);
+        ellipse(i * recw + recw / 2, y, w * 2);
+    }
+    }
+
+    function windowResized() {
+    resizeCanvas(windowWidth, 400);
+    calculateLayout();
+    }
+
+    function calculateLayout() {
+    recw = width / count;
+    baseY = height - w;
+    amplitude = height * 0.75;
+    }
+
+</script>
+
+</body>
+</html>

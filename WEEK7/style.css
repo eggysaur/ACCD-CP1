@@ -1,0 +1,27 @@
+/* Import Minecraftia from Font Library (hosts the webfont stylesheet) */
+@import url('https://fontlibrary.org//face/minecraftia');
+
+/* Fallback @font-face (direct .woff) in case the import is unavailable */
+@font-face {
+	font-family: 'MinecraftiaFallback';
+	src: url('https://fonts.cdnfonts.com/s/31977/Minecraftia.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* CSS variable for the Minecraftia stack */
+:root {
+	--mc-font: 'MinecraftiaRegular', 'Minecraftia', 'MinecraftiaFallback', monospace;
+}
+
+/* Apply Minecraftia as the font for everything */
+html, body, * {
+	font-family: var(--mc-font) !important;
+}
+
+/* Optional: tweak default line-height for better readability with pixel fonts */
+body {
+	line-height: 1.15;
+}
+
