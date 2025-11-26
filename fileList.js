@@ -7,6 +7,9 @@ const files = {
   "WEEK1": [
     "index.html"
   ],
+  "WEEK10": [
+    "index.html"
+  ],
   "WEEK2": [
     "index.html",
     "responsiveHW.html"

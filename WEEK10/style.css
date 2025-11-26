@@ -1,0 +1,72 @@
+/* Import Minecraftia from Font Library (hosts the webfont stylesheet) */
+@import url('https://fontlibrary.org//face/minecraftia');
+
+/* Fallback @font-face (direct .woff) in case the import is unavailable */
+@font-face {
+	font-family: 'MinecraftiaFallback';
+	src: url('https://fonts.cdnfonts.com/s/31977/Minecraftia.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+*{
+	font-family: var(--mc-font) !important;
+}
+html, body { 
+	margin: 0; 
+	padding: 0; 
+	height: 100%; 
+	overflow-x: hidden;
+	text-align: center;
+	align-items: center;
+}
+        
+#container { 
+	width: 90%; 
+}
+
+canvas { display: block; }
+
+.blog{
+	display: inline-block;
+	text-align: left;
+	padding: 20px;
+	background-color: #f0f0f0;
+	margin: 20px;
+	width:50%;
+}
+.cards{
+	
+	display: grid;
+  	grid-template-columns: repeat(3, 1fr);
+  	gap: 20px;
+	margin: 20px;
+
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;        /* horizontal centering */
+    justify-content: flex-start;/* top-align content */
+    text-align: left;
+    background-color: #f0f0f0;
+    padding: 10px;
+	margin:0 auto;
+}
+
+img{
+    margin: 0 auto;
+    height:auto;
+    display:block;
+    width:100%;
+    border: 2px solid black;
+}
+
+:root {
+	--mc-font: 'MinecraftiaRegular', 'Minecraftia', 'MinecraftiaFallback', monospace;
+}
+
+body {
+	line-height: 1.15;
+}
+

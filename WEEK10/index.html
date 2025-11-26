@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>p5 full-width canvas</title>
+    <style>
+        @import url('style.css');
+        
+    </style>
+</head>
+<body>
+
+<div id="container"></div>
+<div class="blog">
+    <h1>Time and Oscillation</h1>
+</div>
+<div class="cards">
+    <div class="card">
+        <img src="images/1.PNG">
+        <p>
+            I wanted to use WEBGL, so i tried making some kind of spiral thing using PI but it was kinda ugly
+        </p>
+    </div>
+
+    <div class="card">
+        <img src="images/2.PNG" >
+        <p>
+            I then tried to make a bunch of spheres in a cos wave but it was also kind of ugly
+
+        </p>
+    </div>
+
+    <div class="card">
+        <img src="images/3.5.PNG" >
+        <p>
+            i for soem reason stayed in the 3d mode and ended up generaying a spiral using degree angles multiplied by cos
+
+        </p>
+    </div>
+
+    <div class="card">
+        <img src="images/3.PNG" >
+        <p>
+            made the spiral much more dense by changing the size of the spheres and adjusting the angle multiplier
+        </p>
+    </div>
+
+    <div class="card">
+        <img src="images/4.PNG" >
+        <p>
+            did something complicated for the color to be honest i ripped it from a past project cause it makes my life easier.
+            at the time, i didn't know you could change the HSL so the color is in RBG and its really complicated for no reason.
+        </p>
+    </div>
+
+    <div class="card">
+        <img src="images/5.PNG" >
+        <p>
+            i realize i didnt do the second objects where it changes based off an interval so bam- white glowing torus that flips rotation every 5 seconds.
+
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+<script>
+let angle;
+var palette;
+let cnv;
+let rotateDir = 1;
+let lastFlip = 0;
+let flipInterval = 5000;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  angleMode(DEGREES);
+
+  cnv = createCanvas(document.documentElement.clientWidth, windowHeight);
+    cnv.parent("container");
+  
+  palette = [
+    color(255, 0, 0),
+    color(255, 165, 0),
+    color(255, 255, 0),
+    color(0, 255, 0),
+    color(0, 100, 100),
+    color(0, 50, 255),
+    color(75, 0, 130),
+    color(238, 0, 238),
+    color(238, 0, 100)
+  ];
+}
+
+function draw() {
+  background(0);
+
+  if (millis() - lastFlip > flipInterval) {
+    rotateDir *= -1;
+    lastFlip = millis();
+  }
+
+  for (let n = 0; n < 1300; n++) {
+    angle = n * 132.5;
+    let speedof = 0.05;
+
+    let radius = n * 0.5;
+    let x = cos(angle) * radius;
+    let y = sin(angle) * radius;
+
+    let rotatedX = x * cos(millis() * speedof) - y * sin(millis() * speedof);
+    let rotatedY = x * sin(millis() * speedof) + y * cos(millis() * speedof);
+
+    let t = (n / 1300 + millis() * 0.0005) % 1;
+
+    let colorIndex = floor(t * (palette.length - 1));
+    let nextColorIndex = (colorIndex + 1) % palette.length;
+    let lerpAmount = t * (palette.length - 1) - colorIndex;
+
+    let sphereColor = lerpColor(
+      palette[colorIndex],
+      palette[nextColorIndex],
+      lerpAmount
+    );
+
+    fill(sphereColor);
+    noStroke();
+    push();
+    translate(rotatedX, rotatedY, 10);
+    rotateY(90);
+    sphere(45, 2);
+    pop();
+  }
+
+  push();
+    noStroke();
+    fill(255);
+    translate(0, 0, 200);
+    rotateY(frameCount * 1.5 * rotateDir);
+    torus(120, 10, 50, 10);
+  pop();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+
+
+</body>
+</html>
