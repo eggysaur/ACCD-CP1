@@ -7,7 +7,7 @@ class Grass {
     }
 
     display() {
-        noStroke();
+        stroke();
         fill(100, 200, 100);
         rect(this.x, this.y, 5, 5);
     }
