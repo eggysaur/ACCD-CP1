@@ -1,58 +1,58 @@
 class Grass {
-    constructor(x, y) {
+    constructor(x, y, value=50, size=20) {
         this.x = x;
         this.y = y;
-        this.value = 100;
+        this.value = value;
+        this.size = size;
+        this.ripe = false;
         this.maxValue = 100;
     }
 
     display() {
-        stroke();
-        fill(100, 200, 100);
-        rect(this.x, this.y, 5, 5);
+        noStroke();
+        fill(90, this.value, 90);
+        rect(this.x, this.y, this.size, this.size);
     }
 
-    grow() {
-        this.value = min(this.value + 0.5, this.maxValue);
+    grow(points = 1.25) {
+        if(this.value <= this.maxValue-20)
+            this.value *= points;
     }
 
     spread() {
-        if (random() < 0.01 && this.value > 50) {
-            return new Grass(this.x + random(-20, 20), this.y + random(-20, 20));
+        if (this.value >= this.maxValue) {
+            return true;
         }
-        return null;
+        else {
+            return false;
+        }   
     }
 
-    isDead() {
-        return this.value <= 0;
+    getVal() {
+        return this.value;
     }
 }
 
 class Prey {
-    constructor(x, y) {
+    constructor(x=0, y=0, size=25) {
         this.x = x;
         this.y = y;
-        this.size = 5;
+        this.size = size;
         this.energy = 100;
         this.speed = 1;
     }
 
     display() {
-        fill(0, 150, 255);
+        noStroke();
+        fill(200, 100, 100);
         ellipse(this.x, this.y, this.size);
     }
 
-    move() {
-        // No movement unless seeking
+    move(x,y) {
+        this.x = x;
+        this.y = y;
     }
-
-    seek(target) {
-        // Instantly move to target
-        this.x = target.x;
-        this.y = target.y;
-        this.energy -= 0.2;
-    }
-
+    
     eat(grassList) {
         for (let i = grassList.length - 1; i >= 0; i--) {
             let d = dist(this.x, this.y, grassList[i].x, grassList[i].y);
