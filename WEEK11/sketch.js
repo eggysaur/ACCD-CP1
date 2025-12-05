@@ -1,3 +1,57 @@
+// Helper: check if a tile is occupied by any predator
+function isTileOccupiedByPredator(i, j) {
+    let tileX = grassList[i][j].x;
+    let tileY = grassList[i][j].y;
+    let tileSize = grassList[i][j].size;
+    for (let predator of predatorList) {
+        let px = predator.x;
+        let py = predator.y;
+        if (abs(px - (tileX + tileSize / 2)) < 1 && abs(py - (tileY + tileSize / 2)) < 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function placePredator(i, j, predator) {
+    if (!isTileOccupiedByPredator(i, j)) {
+        let x = grassList[i][j].x + grassList[i][j].size / 2;
+        let y = grassList[i][j].y + grassList[i][j].size / 2;
+        predator.move(x, y);
+    }
+}
+
+function showPredators() {
+    for (let predator of predatorList) {
+        predator.display();
+    }
+}
+
+function get2Prey(x, y, predator) {
+    // convert pixel coordinates to tile indices
+    let i = floor(x / (size + 2));
+    let j = floor(y / (size + 2));
+
+    // Find the tile with the most energetic prey in range
+    let bestK = -1;
+    let bestEnergy = -Infinity;
+    let bestI = -1, bestJ = -1;
+    for (let k = 0; k < preyList.length; k++) {
+        let prey = preyList[k];
+        let pi = floor(prey.x / (size + 2));
+        let pj = floor(prey.y / (size + 2));
+        let d = dist(i, j, pi, pj);
+        if (d <= 5 && prey.energy > bestEnergy && !isTileOccupiedByPredator(pi, pj)) {
+            bestEnergy = prey.energy;
+            bestK = k;
+            bestI = pi;
+            bestJ = pj;
+        }
+    }
+    if (bestK !== -1 && bestI !== -1 && bestJ !== -1) {
+        placePredator(bestI, bestJ, predator);
+    }
+}
 // Adjustable rate for grass depletion per ms per prey
 let GRASS_DEPLETION_RATE = 0.001;
 // Helper: check if a tile is occupied by any prey
@@ -57,7 +111,7 @@ function passiveGrow(){
         }
     }
 }
-function findGrass(x, y, range=10) {
+function findGrass(x, y, range=5) {
     let bestI = -1;
     let bestJ = -1;
     let maxVal = -Infinity;
@@ -129,9 +183,27 @@ function setup() {
     // prey    
     for (let i = 0; i < 5; i++) {
         let prey = new Prey();
+        prey.age = 0; // Add age property
         preyList.push(prey);
         placePrey(floor(random(25)),floor(random(25)), preyList[i]);
     }
+        // predators
+        for (let i = 0; i < 2; i++) {
+            let predator = new Predator(0, 0, 12.5);
+            predator.age = 0; // Add age property
+            predatorList.push(predator);
+            // Place predator on a random tile not occupied by another predator
+            let tries = 0;
+            while (tries < 100) {
+                let pi = floor(random(25));
+                let pj = floor(random(25));
+                if (!isTileOccupiedByPredator(pi, pj)) {
+                    placePredator(pi, pj, predator);
+                    break;
+                }
+                tries++;
+            }
+        }
     
 }
 
@@ -142,9 +214,10 @@ function draw() {
     background(220);
     showField();
     showPrey();
+    showPredators();
     
     
-    // For each prey, decrease grass value by adjustable rate per ms if standing on a tile
+    // For each prey, use eat() to transfer energy from grass to prey if standing on a tile
     let elapsed = currentTime - lastTime;
     for (let prey of preyList) {
         let i = floor(prey.x / (size + 2));
@@ -153,8 +226,10 @@ function draw() {
             i >= 0 && i < grassList.length &&
             j >= 0 && j < grassList[i].length
         ) {
-            grassList[i][j].value -= elapsed * GRASS_DEPLETION_RATE;
-            // Clamp to zero
+            // Use eat function, passing only the current tile and proportional amount
+            let eatAmount = elapsed * GRASS_DEPLETION_RATE;
+            prey.eat([grassList[i][j]], eatAmount);
+            // Clamp grass value to zero
             if (grassList[i][j].value < 0) grassList[i][j].value = 0;
         }
     }
@@ -167,6 +242,77 @@ function draw() {
 
 
     if (currentTime - lastTime > interval) {
+        // Prey reproduction logic
+        for (let prey of preyList) {
+            if (prey.energy >= 150) {
+                // Create new prey at same location with energy 25
+                let baby = new Prey(prey.x, prey.y, prey.size);
+                baby.energy = 25;
+                baby.age = 0;
+                preyList.push(baby);
+                // Subtract 100 energy from parent
+                prey.energy -= 100;
+            }
+        }
+
+        // Predator movement, eating, and breeding
+        for (let predator of predatorList) {
+            get2Prey(predator.x, predator.y, predator);
+        }
+        // After all have moved, eat and breed
+        for (let predator of predatorList) {
+            // Eat prey on the same tile
+            let i = floor(predator.x / (size + 2));
+            let j = floor(predator.y / (size + 2));
+            let preyOnTile = [];
+            for (let k = preyList.length - 1; k >= 0; k--) {
+                let prey = preyList[k];
+                let pi = floor(prey.x / (size + 2));
+                let pj = floor(prey.y / (size + 2));
+                if (i === pi && j === pj) {
+                    preyOnTile.push(prey);
+                }
+            }
+            if (preyOnTile.length > 0) {
+                predator.eat(preyOnTile);
+                for (let eaten of preyOnTile) {
+                    let idx = preyList.indexOf(eaten);
+                    if (idx !== -1) preyList.splice(idx, 1);
+                }
+            }
+        }
+        // Breed after eating
+        let newPredators = [];
+        for (let predator of predatorList) {
+            if (predator.energy > 250) {
+                let baby = new Predator(predator.x, predator.y, 12.5);
+                baby.energy = 100;
+                baby.age = 0;
+                newPredators.push(baby);
+                predator.energy -= 150;
+            }
+        }
+        predatorList.push(...newPredators);
+
+        // Increment age and remove dead prey
+        for (let i = preyList.length - 1; i >= 0; i--) {
+            let prey = preyList[i];
+            if (prey.age === undefined) prey.age = 0;
+            prey.age++;
+            if (prey.age >= 5) { // 10 intervals of 1500ms
+                preyList.splice(i, 1);
+            }
+        }
+        // Increment age and remove dead predators
+        for (let i = predatorList.length - 1; i >= 0; i--) {
+            let predator = predatorList[i];
+            if (predator.age === undefined) predator.age = 0;
+            predator.age++;
+            if (predator.age >= 5) { // 20 intervals of 1500ms
+                predatorList.splice(i, 1);
+            }
+        }
+
         all2Grass();
         lastTime = currentTime;      // run your function
     }
@@ -200,6 +346,16 @@ function get2Grass(x, y, prey) {
                 for (let jj = 0; jj < grassList[ii].length; jj++) {
                     if (!isTileOccupied(ii, jj)) {
                         let val = grassList[ii][jj].getVal();
+                        // Predator movement and reproduction
+                        for (let predator of predatorList) {
+                            get2Prey(predator.x, predator.y, predator);
+                            if (predator.energy > 250) {
+                                let baby = new Predator(predator.x, predator.y, predator.size);
+                                baby.energy = 100;
+                                predatorList.push(baby);
+                                predator.energy -= 150;
+                            }
+                        }
                         if (val > maxVal) {
                             maxVal = val;
                             bestI = ii;

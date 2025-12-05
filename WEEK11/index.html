@@ -14,14 +14,14 @@
         
         body {
             font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            /* Removed height and flex for scrollability and canvas visibility */
         }
         
         #canvas-container {
-            flex: 1;
             width: 100%;
+            min-height: 100vh;
+            display: block;
+            margin: 0 auto;
         }
         
         #text-container {
@@ -40,11 +40,24 @@
     </style>
 </head>
 <body>
-    <div id="canvas-container">
-
+    <div id="canvas-container"></div>
+    <!-- Buttons for adding prey and predator -->
+    <div id="controls" style="padding:10px;">
+        <button id="add-prey">Add Prey</button>
+        <button id="add-predator">Add Predator</button>
+    </div>
+    <!-- Counters for prey and predator -->
+    <div id="counters" style="padding:10px;">
+        <span id="prey-count">Prey: 0</span>
+        <span id="predator-count" style="margin-left:20px;">Predators: 0</span>
     </div>
     <div id="text-container">
-        not complete yet sorry
+        <h1>PREDATOR/PREY/GRASS</h1>
+        <p></p>
+        <img src="Capture.PNG" style="width:50%">
+        <p>the intention with this system was to create a prey/predator/grass dynamic that would supposedly sustain itself and you would be able to balance it by adjusting the variables. this was actually shockingly difficult and it kind of sort of doesn't really work. yes i did use chatgpt to help me, but this was so complicated an idea that i can't really say i regret it. even though it kind of doesn't work.</p>
+        <br>
+        <p>since it doenst work, ehre was my simple agario implementation using the particle system we did in lass: https://editor.p5js.org/ihua7/sketches/uFfsp9S4K </p>
     </div>
     <script src="classes.js"></script>
     <script src="sketch.js"></script>
