@@ -1,3 +1,5 @@
+// Adjustable rate for grass depletion per ms per prey
+let GRASS_DEPLETION_RATE = 0.001;
 // Helper: check if a tile is occupied by any prey
 function isTileOccupied(i, j) {
     let tileX = grassList[i][j].x;
@@ -141,12 +143,8 @@ function draw() {
     showField();
     showPrey();
     
-    currentTime = millis(); // current time in ms
-    fill(0);                // text color
-    textSize(16);           // text size
-    text("Time: " + floor(currentTime-lastTime), width-100, height-10); // position at (10, 20)
-
-    // For each prey, decrease grass value by 1 per ms if standing on a tile
+    
+    // For each prey, decrease grass value by adjustable rate per ms if standing on a tile
     let elapsed = currentTime - lastTime;
     for (let prey of preyList) {
         let i = floor(prey.x / (size + 2));
@@ -155,11 +153,18 @@ function draw() {
             i >= 0 && i < grassList.length &&
             j >= 0 && j < grassList[i].length
         ) {
-            grassList[i][j].value -= elapsed;
+            grassList[i][j].value -= elapsed * GRASS_DEPLETION_RATE;
             // Clamp to zero
             if (grassList[i][j].value < 0) grassList[i][j].value = 0;
         }
     }
+
+    currentTime = millis(); // current time in ms
+    fill(0);                // text color
+    textSize(16);           // text size
+    text("currentTime - lastTime: " + floor(currentTime-lastTime), 0, height-10); // position at (10, 20)
+    text("elapsed time: " + floor(elapsed), 0, height-30);
+
 
     if (currentTime - lastTime > interval) {
         all2Grass();

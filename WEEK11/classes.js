@@ -38,13 +38,13 @@ class Prey {
         this.x = x;
         this.y = y;
         this.size = size;
-        this.energy = 100;
+        this.energy = 50;
         this.speed = 1;
     }
 
     display() {
         noStroke();
-        fill(200, 100, 100);
+        fill(200, this.energy, 100);
         ellipse(this.x, this.y, this.size);
     }
 
@@ -52,7 +52,7 @@ class Prey {
         this.x = x;
         this.y = y;
     }
-    
+
     eat(grassList) {
         for (let i = grassList.length - 1; i >= 0; i--) {
             let d = dist(this.x, this.y, grassList[i].x, grassList[i].y);
